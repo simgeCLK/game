@@ -1,0 +1,95 @@
+.kutu {
+    margin-bottom: 50px;
+    border: 3px solid #720868;
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #ffd6fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 10px black;
+}
+
+.card-img-top {
+    width: 180px;
+}
+
+html {
+    height: 100%
+}
+
+body {
+    background-image: url('https://images.hdqwalls.com/download/the-big-universe-is-here-4k-q4-1920x1080.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#title {
+    font-family: 'Style Script', cursive;
+    color: #EA80FC;
+    text-align: center;
+    text-shadow: 30px 30px 30px black;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.tip {
+    font-size: 30px;
+    padding: 10px 80px;
+    border-radius: 10px;
+    background-color: lavender;
+
+}
+
+.team-single{
+    cursor: pointer;
+}
+
+/*.team-single:hover .side-front {*/
+/*    transform: rotateY(0deg);*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.team-single:hover .side-back {*/
+/*    transform: rotateY(180deg);*/
+/*}*/
+
+.content-area {
+    transform: perspective(1000px);
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.side-back {
+    position: relative;
+    transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.side-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(-180deg);
+}
+
+.side-back, .side-front {
+    backface-visibility: hidden;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.que {
+    width: 102px;
+    height: 115px;
+}
+

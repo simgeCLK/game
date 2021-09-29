@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5 ">
+    <div class="row" id="games">
+        <div class="col-sm-12" id="title">
+            <h1>AGİTATOR</h1>
+            <h1>SCORE : <span id="score">0</span></h1>
+        </div>
+    </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    var score = 0;
+
+    var games = [
+      getGames('assets/images/angel.png'),
+      getGames('assets/images/computer.png'),
+      getGames('assets/images/sad.png'),
+      getGames('assets/images/tired.png'),
+      getGames('assets/images/angel.png'),
+      getGames('assets/images/computer.png'),
+      getGames('assets/images/sad.png'),
+      getGames('assets/images/tired.png'),
+    ];
+
+    var $games = $('#games');
+
+    $games.on('click', '.team-single', function () {
+      if ($(this).find('.side-back').hasClass('turn') && $(this).find('.side-front').hasClass('turn')) {
+        $(this).find('.side-back').css('transform', 'rotateY(0deg)');
+        $(this).find('.side-front').css('transform', 'rotateY(180deg)');
+      } else {
+        $(this).find('.side-back').css('transform', 'rotateY(180deg)');
+        $(this).find('.side-front').css('transform', 'rotateY(0deg)');
+      }
+
+      $(this).find('.side-back').toggleClass('turn');
+      $(this).find('.side-front').toggleClass('turn');
+
+      var front = $games.find('.turn');
+      if (front.toArray().length === 4) {
+        var images = $games.find('.side-front.turn img').toArray().map(function (val) {
+          return $(val).attr('src');
+        });
+
+      if (images[0] === images[1]) {
+          setTimeout(function () {
+            $games.find('.turn').remove();
+            score += 1;
+            if (score===4){
+             alert('TEBRİKLERRR!!!!');
+             }
+            $('#score').text(score);
+          }, 1000);
+        
+        } else {
+          setTimeout(function () {
+            $games.find('.side-back.turn').css('transform', 'rotateY(0deg)');
+            $games.find('.side-front.turn').css('transform', 'rotateY(180deg)');
+            $games.find('.turn').removeClass('turn');
+          }, 1000);
+        }
+      }
+    });
+
+      var shuffleGames = shuffle(games);
+    for (var i = 0; i < shuffleGames.length; i++) {
+      $games.append(shuffleGames[i]);
+    }
+
+    function getGames(img) {
+      return `<div class="col-sm-3 d-flex justify-content-center">
+                    <div class="team-single">
+                        <div class="content-area">
+                            <div class="side-back">
+                                <div class="kutu">
+                                    <img class="que" src="assets/images/question-mark.png">
+                                </div>
+                            </div>
+                            <div class="side-front">
+                                <div class="kutu">
+                                    <div class="card-body text-center">
+                                        <img class="card-img-top" src="${img}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+    }
+    
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+  });
+</script>
+</body>
+</html>
